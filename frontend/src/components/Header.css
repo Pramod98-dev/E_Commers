@@ -2,8 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #232f3e;
-  padding: 10px 30px;
+  background: linear-gradient(90deg, #232f3e 80%, #f7dfa5 100%);
+  padding: 0 30px;
+  height: 54px;
+  min-height: 54px;
+  max-height: 54px;
+  box-shadow: 0 2px 8px rgba(35,47,62,0.09);
 }
 .header__left {
   display: flex;
@@ -35,4 +39,49 @@
 }
 .header__login:hover {
   background: #f3a847;
+}
+
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.profile-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.profile-dropdown-content {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: #fff;
+  min-width: 150px;
+  box-shadow: 0 2px 12px rgba(35,47,62,0.13);
+  border-radius: 8px;
+  z-index: 999;
+  padding: 10px 0;
+}
+.profile-dropdown:hover .profile-dropdown-content,
+.profile-dropdown:focus-within .profile-dropdown-content {
+  display: flex;
+}
+.profile-dropdown-content button {
+  background: none;
+  border: none;
+  color: #232f3e;
+  padding: 10px 22px;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.profile-dropdown-content button:hover {
+  background: #febd69;
+  color: #232f3e;
 }

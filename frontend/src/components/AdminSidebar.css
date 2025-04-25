@@ -1,6 +1,6 @@
 .admin-sidebar {
   width: 220px;
-  background: linear-gradient(180deg, #232f3e 80%, #febd69 100%);
+  background: linear-gradient(180deg, #232f3e 80%, #f7dfa5 100%);
   color: #fff;
   min-height: 100vh;
   box-shadow: 2px 0 16px rgba(35,47,62,0.09);
@@ -17,7 +17,7 @@
   padding: 32px 0 24px 0;
   text-align: center;
   letter-spacing: 1px;
-  color: #febd69;
+  color: #f7dfa5;
   background: #232f3e;
 }
 .admin-sidebar nav ul {
@@ -36,7 +36,7 @@
 }
 .admin-sidebar nav li.active,
 .admin-sidebar nav li:hover {
-  background: #febd69;
+  background: #f7dfa5;
   color: #232f3e;
   border-left: 4px solid #232f3e;
 }

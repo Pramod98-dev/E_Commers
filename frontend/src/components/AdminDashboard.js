@@ -6,6 +6,7 @@ import "./AdminSidebar.css";
 import "./AdminDashboard.css";
 import DashboardStats from "./DashboardStats";
 import "./DashboardStats.css";
+import Header from "./Header";
 
 const AdminDashboard = ({ admin, onLogout }) => {
   const [section, setSection] = useState("dashboard");
@@ -281,38 +282,22 @@ const AdminDashboard = ({ admin, onLogout }) => {
   return (
     <div className="admin-dashboard-layout">
       <AdminSidebar active={section} onSelect={setSection} />
-      <header
-        className="admin-header"
-        style={{
-          marginLeft: sidebarCollapsed ? 60 : 220,
-          transition: 'margin-left 0.2s',
-          background: 'linear-gradient(90deg, #232f3e 70%, #febd69 100%)',
-          color: '#fff',
-          boxShadow: '0 2px 8px rgba(35,47,62,0.09)',
-          zIndex: 101,
-          width: '100%',
-          height: 68,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          position: 'fixed',
-          left: 0,
-          top: 0,
-          padding: '0 38px 0 38px',
-          borderBottom: '2px solid #f7dfa5',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-          <span style={{ color: '#febd69', fontWeight: 700, fontSize: 22, letterSpacing: 1.5 }}>Ms Mobile Admin</span>
-          <span style={{ fontSize: 14, color: '#fff', background: 'rgba(35,47,62,0.15)', borderRadius: 6, padding: '3px 12px', marginLeft: 12, fontWeight: 500 }}>
-            {section.charAt(0).toUpperCase() + section.slice(1)}
-          </span>
-        </div>
-      </header>
-      <main className="admin-dashboard-main" style={{ paddingTop: 80, background: '#fff' }}>
-        {renderSection()}
-      </main>
-      {/* Ensure no logout button or custom footer is rendered here. */}
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
+        <Header
+          admin={admin}
+          isAdmin={true}
+          onLogout={onLogout}
+          sidebarCollapsed={sidebarCollapsed}
+        />
+        <main className="admin-dashboard-main">
+          {error && <div className="form-error">{error}</div>}
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            renderSection()
+          )}
+        </main>
+      </div>
     </div>
   );
 };
