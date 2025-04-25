@@ -3,9 +3,11 @@ import "./Dashboard.css";
 import { OrdersPerProductChart, OrdersPerStatusChart } from "./Charts";
 import AdminSidebar from "./AdminSidebar";
 import "./AdminSidebar.css";
+import "./AdminDashboard.css";
 
-const AdminDashboard = ({ admin }) => {
+const AdminDashboard = ({ admin, onLogout }) => {
   const [section, setSection] = useState("dashboard");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [summary, setSummary] = useState(null);
@@ -127,13 +129,12 @@ const AdminDashboard = ({ admin }) => {
     switch (section) {
       case "dashboard":
         return (
-          <div className="admin-main-section">
-            <h2>Welcome, {admin?.name || "Admin"}!</h2>
-            <div style={{marginBottom: 24}}>
-              <b>Email:</b> {admin?.email}<br/>
+          <div className="admin-main-section stylish-section">
+            <div className="admin-info">
+              <b>Email:</b> {admin?.email} &nbsp; | &nbsp;
               <b>Role:</b> {admin?.role}
             </div>
-            <div className="admin-summary">
+            <div className="admin-summary card">
               <h3>Summary</h3>
               {summary && (
                 <ul>
@@ -144,11 +145,11 @@ const AdminDashboard = ({ admin }) => {
               )}
             </div>
             <div className="admin-charts">
-              <div style={{maxWidth: 400, margin: "32px auto"}}>
+              <div className="card" style={{maxWidth: 400, margin: "32px auto"}}>
                 <h4>Orders per Product</h4>
                 <OrdersPerProductChart data={ordersPerProduct} />
               </div>
-              <div style={{maxWidth: 400, margin: "32px auto"}}>
+              <div className="card" style={{maxWidth: 400, margin: "32px auto"}}>
                 <h4>Orders per Status</h4>
                 <OrdersPerStatusChart data={ordersPerStatus} />
               </div>
@@ -157,13 +158,13 @@ const AdminDashboard = ({ admin }) => {
         );
       case "products":
         return (
-          <div className="admin-main-section">
-            <h3 style={{marginTop: 0}}>All Products</h3>
-            <button onClick={() => setShowAddProduct(!showAddProduct)} style={{marginBottom: 16}}>
+          <div className="admin-main-section stylish-section">
+            <h3 className="admin-title">All Products</h3>
+            <button className="primary-btn" onClick={() => setShowAddProduct(!showAddProduct)} style={{marginBottom: 16}}>
               {showAddProduct ? "Cancel" : "Add Product"}
             </button>
             {showAddProduct && (
-              <form onSubmit={handleAddProduct} className="add-product-form">
+              <form onSubmit={handleAddProduct} className="add-product-form card">
                 <input required placeholder="Name" value={newProduct.name} onChange={e => setNewProduct(p => ({...p, name: e.target.value}))} />
                 <input required type="number" placeholder="Price" value={newProduct.price} onChange={e => setNewProduct(p => ({...p, price: e.target.value}))} />
                 <input required type="number" placeholder="Stock" value={newProduct.stock} onChange={e => setNewProduct(p => ({...p, stock: e.target.value}))} />
@@ -178,11 +179,11 @@ const AdminDashboard = ({ admin }) => {
             ) : products.length === 0 ? (
               <div>No products found.</div>
             ) : (
-              <ul style={{textAlign: "left", maxWidth: 600, margin: "0 auto"}}>
+              <ul className="product-list">
                 {products.map((product, idx) => (
-                  <li key={product.id || idx}>
+                  <li className="product-card card" key={product.id || idx}>
                     {showEditProduct === product.id ? (
-                      <form onSubmit={handleEditProductSubmit} className="edit-product-form" style={{marginBottom: 8}}>
+                      <form onSubmit={handleEditProductSubmit} className="edit-product-form">
                         <input required value={editProduct.name} onChange={e => setEditProduct(p => ({...p, name: e.target.value}))} />
                         <input required type="number" value={editProduct.price} onChange={e => setEditProduct(p => ({...p, price: e.target.value}))} />
                         <input required type="number" value={editProduct.stock} onChange={e => setEditProduct(p => ({...p, stock: e.target.value}))} />
@@ -192,10 +193,16 @@ const AdminDashboard = ({ admin }) => {
                       </form>
                     ) : (
                       <React.Fragment>
-                        <b>{product.name}</b> - Price: ₹{product.price} - Stock: {product.stock}
-                        <div style={{fontSize: 13, color: "#666", margin: "4px 0 8px 0"}}>{product.description}</div>
-                        <button onClick={() => handleEditProduct(product)} style={{marginRight: 8}}>Edit</button>
-                        <button onClick={() => handleDeleteProduct(product.id)} style={{color: "#e53935"}}>Delete</button>
+                        <div className="product-main">
+                          <b>{product.name}</b>
+                          <span className="product-price">₹{product.price}</span>
+                          <span className="product-stock">Stock: {product.stock}</span>
+                        </div>
+                        <div className="product-desc">{product.description}</div>
+                        <div className="product-actions">
+                          <button className="secondary-btn" onClick={() => handleEditProduct(product)} style={{marginRight: 8}}>Edit</button>
+                          <button className="danger-btn" onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                        </div>
                       </React.Fragment>
                     )}
                   </li>
@@ -206,8 +213,8 @@ const AdminDashboard = ({ admin }) => {
         );
       case "orders":
         return (
-          <div className="admin-main-section">
-            <h3 style={{marginTop: 0}}>All Orders</h3>
+          <div className="admin-main-section stylish-section">
+            <h3 className="admin-title">All Orders</h3>
             {loading ? (
               <div>Loading...</div>
             ) : error ? (
@@ -215,10 +222,16 @@ const AdminDashboard = ({ admin }) => {
             ) : orders.length === 0 ? (
               <div>No orders found.</div>
             ) : (
-              <ul style={{textAlign: "left", maxWidth: 600, margin: "0 auto"}}>
+              <ul className="order-list">
                 {orders.map((order, idx) => (
-                  <li key={order.id || idx}>
-                    <b>Order #{order.id}</b>: {order.product} - Qty: {order.quantity} - Status: {order.status} - User: {order.userEmail}
+                  <li className="order-card card" key={order.id || idx}>
+                    <div className="order-main">
+                      <b>Order #{order.id}</b>
+                      <span className="order-product">{order.product}</span>
+                      <span className="order-qty">Qty: {order.quantity}</span>
+                      <span className="order-status">Status: {order.status}</span>
+                      <span className="order-user">User: {order.userEmail}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -227,14 +240,14 @@ const AdminDashboard = ({ admin }) => {
         );
       case "analytics":
         return (
-          <div className="admin-main-section">
-            <h3 style={{marginTop: 0}}>Analytics</h3>
+          <div className="admin-main-section stylish-section">
+            <h3 className="admin-title">Analytics</h3>
             <div className="admin-charts">
-              <div style={{maxWidth: 400, margin: "32px auto"}}>
+              <div className="card" style={{maxWidth: 400, margin: "32px auto"}}>
                 <h4>Orders per Product</h4>
                 <OrdersPerProductChart data={ordersPerProduct} />
               </div>
-              <div style={{maxWidth: 400, margin: "32px auto"}}>
+              <div className="card" style={{maxWidth: 400, margin: "32px auto"}}>
                 <h4>Orders per Status</h4>
                 <OrdersPerStatusChart data={ordersPerStatus} />
               </div>
@@ -249,7 +262,46 @@ const AdminDashboard = ({ admin }) => {
   return (
     <div className="admin-dashboard-layout">
       <AdminSidebar active={section} onSelect={setSection} />
-      <main className="admin-dashboard-main">
+      <header
+        className="admin-header"
+        style={{
+          marginLeft: sidebarCollapsed ? 60 : 220,
+          transition: 'margin-left 0.2s',
+          background: '#232f3e',
+          color: '#fff',
+          boxShadow: '0 2px 8px rgba(35,47,62,0.09)',
+          zIndex: 101,
+          width: '100%',
+          height: 68,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          padding: '0 38px 0 38px',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ color: '#febd69', fontWeight: 700, fontSize: 22, letterSpacing: 1.5 }}>Ms Mobile Admin</span>
+        </div>
+        <button
+          style={{
+            background: '#febd69',
+            border: 'none',
+            color: '#232f3e',
+            padding: '8px 18px',
+            borderRadius: 4,
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'background 0.2s',
+          }}
+          onClick={onLogout}
+        >
+          Logout
+        </button>
+      </header>
+      <main className="admin-dashboard-main" style={{paddingTop: 68}}>
         {renderSection()}
       </main>
     </div>

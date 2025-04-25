@@ -1,0 +1,48 @@
+.admin-header {
+  width: 100%;
+  height: 68px;
+  background: #232f3e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 101;
+  box-shadow: 0 2px 8px rgba(35,47,62,0.09);
+  padding: 0 38px 0 38px;
+  margin-left: 220px;
+  transition: margin-left 0.2s;
+}
+.admin-header.collapsed {
+  margin-left: 60px;
+}
+.admin-header .header__left {
+  display: flex;
+  align-items: center;
+}
+.admin-header .header__brand {
+  color: #febd69;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 12px;
+  letter-spacing: 1.5px;
+}
+.admin-header .header__nav {
+  display: flex;
+  gap: 18px;
+}
+.admin-header .header__login {
+  background: #febd69;
+  border: none;
+  color: #232f3e;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.admin-header .header__login:hover {
+  background: #f3a847;
+}
