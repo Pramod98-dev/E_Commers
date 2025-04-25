@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -15,6 +15,21 @@ function App() {
   const [showAuthModal, setShowAuthModal] = useState(null); // "login" | "signup" | null
   const [user, setUser] = useState(null); // {name, email, role}
   const [admin, setAdmin] = useState(null); // {name, email, role}
+
+  // Persist login state in localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedAdmin = localStorage.getItem("admin");
+    if (storedUser) setUser(JSON.parse(storedUser));
+    if (storedAdmin) setAdmin(JSON.parse(storedAdmin));
+  }, []);
+
+  useEffect(() => {
+    if (user) localStorage.setItem("user", JSON.stringify(user));
+    else localStorage.removeItem("user");
+    if (admin) localStorage.setItem("admin", JSON.stringify(admin));
+    else localStorage.removeItem("admin");
+  }, [user, admin]);
 
   const handleLoginClick = (type) => {
     setLoginType(type);
@@ -38,8 +53,10 @@ function App() {
   const handleLogin = (credentials) => {
     if (loginType === "admin") {
       setAdmin({ name: "Admin", email: credentials.email, role: "admin" });
+      setUser(null);
     } else {
       setUser({ name: "User", email: credentials.email, role: "user" });
+      setAdmin(null);
     }
     setShowAuthModal(null);
   };
@@ -47,6 +64,7 @@ function App() {
   // Simulate sign up for user (admin sign up not exposed)
   const handleSignUp = (details) => {
     setUser({ name: details.name, email: details.email, role: "user" });
+    setAdmin(null);
     setShowAuthModal(null);
   };
 
@@ -54,11 +72,18 @@ function App() {
     setUser(null);
     setAdmin(null);
     setLoginType(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("admin");
   };
 
   return (
     <div className="App">
-      <Header onLoginClick={handleLoginClick} />
+      <Header
+        onLoginClick={handleLoginClick}
+        user={user}
+        admin={admin}
+        onLogout={handleLogout}
+      />
       <main className="main-content enhanced-main">
         {user ? (
           <UserDashboard user={user} />
