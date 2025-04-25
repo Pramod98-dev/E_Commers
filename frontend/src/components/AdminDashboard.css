@@ -7,7 +7,7 @@
   flex: 1;
   margin-left: 220px;
   padding: 108px 40px 32px 40px;
-  background: #f8f9fb;
+  background: repeating-linear-gradient(135deg, #f8f9fb, #f8f9fb 32px, #f7dfa5 32px, #f7dfa5 36px);
   min-height: 100vh;
   box-sizing: border-box;
   transition: margin-left 0.2s;
@@ -37,14 +37,14 @@
   margin-bottom: 18px;
 }
 .card {
-  background: #fff;
+  background: linear-gradient(120deg, #fff 80%, #f7dfa5 100%);
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(35,47,62,0.07);
   padding: 22px 18px 18px 18px;
   margin-bottom: 24px;
 }
 .primary-btn {
-  background: #febd69;
+  background: linear-gradient(90deg, #febd69 80%, #fffbe6 100%);
   color: #232f3e;
   font-weight: 700;
   border: none;
@@ -54,12 +54,13 @@
   cursor: pointer;
   margin-bottom: 8px;
   transition: background 0.18s;
+  box-shadow: 0 1px 6px rgba(35,47,62,0.07);
 }
 .primary-btn:hover {
   background: #f7b23a;
 }
 .secondary-btn {
-  background: #43a047;
+  background: linear-gradient(90deg, #43a047 80%, #a5f7c6 100%);
   color: #fff;
   border: none;
   border-radius: 7px;
@@ -68,12 +69,13 @@
   cursor: pointer;
   margin-right: 7px;
   transition: background 0.18s;
+  box-shadow: 0 1px 6px rgba(35,47,62,0.07);
 }
 .secondary-btn:hover {
   background: #388e3c;
 }
 .danger-btn {
-  background: #e53935;
+  background: linear-gradient(90deg, #e53935 80%, #ffbdbd 100%);
   color: #fff;
   border: none;
   border-radius: 7px;
@@ -81,6 +83,7 @@
   font-size: 1.06rem;
   cursor: pointer;
   transition: background 0.18s;
+  box-shadow: 0 1px 6px rgba(35,47,62,0.07);
 }
 .danger-btn:hover {
   background: #b71c1c;
@@ -197,6 +200,12 @@
   color: #e53935;
   font-weight: 600;
   margin: 12px 0 8px 0;
+}
+.admin-header {
+  background: linear-gradient(90deg, #232f3e 70%, #febd69 100%);
+  color: #fff;
+  border-bottom: 2px solid #f7dfa5;
+  box-shadow: 0 2px 8px rgba(35,47,62,0.09);
 }
 @media (max-width: 900px) {
   .admin-dashboard-main {

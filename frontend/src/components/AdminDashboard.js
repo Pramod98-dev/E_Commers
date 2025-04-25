@@ -4,6 +4,8 @@ import { OrdersPerProductChart, OrdersPerStatusChart } from "./Charts";
 import AdminSidebar from "./AdminSidebar";
 import "./AdminSidebar.css";
 import "./AdminDashboard.css";
+import DashboardStats from "./DashboardStats";
+import "./DashboardStats.css";
 
 const AdminDashboard = ({ admin, onLogout }) => {
   const [section, setSection] = useState("dashboard");
@@ -129,29 +131,62 @@ const AdminDashboard = ({ admin, onLogout }) => {
     switch (section) {
       case "dashboard":
         return (
-          <div className="admin-main-section stylish-section">
-            <div className="admin-info">
-              <b>Email:</b> {admin?.email} &nbsp; | &nbsp;
-              <b>Role:</b> {admin?.role}
-            </div>
-            <div className="admin-summary card">
-              <h3>Summary</h3>
-              {summary && (
-                <ul>
-                  <li><b>Total Orders:</b> {summary.totalOrders}</li>
-                  <li><b>Total Products:</b> {summary.totalProducts}</li>
-                  <li><b>Total Revenue:</b> ₹{summary.totalRevenue}</li>
-                </ul>
-              )}
-            </div>
-            <div className="admin-charts">
-              <div className="card" style={{maxWidth: 400, margin: "32px auto"}}>
-                <h4>Orders per Product</h4>
-                <OrdersPerProductChart data={ordersPerProduct} />
-              </div>
-              <div className="card" style={{maxWidth: 400, margin: "32px auto"}}>
-                <h4>Orders per Status</h4>
-                <OrdersPerStatusChart data={ordersPerStatus} />
+          <div className="admin-main-section stylish-section" style={{padding: 0, background: '#fff', boxShadow: 'none'}}>
+            <div style={{padding: '34px 34px 0 34px'}}>
+              <DashboardStats summary={summary} />
+              <div className="dashboard-analytics-row" style={{display: 'flex', gap: 20, marginBottom: 24}}>
+                <div className="card" style={{flex: 2, minWidth: 0}}>
+                  <h4 style={{marginTop: 0}}>E-commerce Overview</h4>
+                  <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 18, fontSize: 16}}>
+                    <div>
+                      <b>Total Products</b>
+                      <div style={{fontSize: 22, color: '#1976d2', fontWeight: 700}}>{summary?.totalProducts ?? '--'}</div>
+                    </div>
+                    <div>
+                      <b>Total Orders</b>
+                      <div style={{fontSize: 22, color: '#43a047', fontWeight: 700}}>{summary?.totalOrders ?? '--'}</div>
+                    </div>
+                    <div>
+                      <b>Total Revenue</b>
+                      <div style={{fontSize: 22, color: '#e53935', fontWeight: 700}}>₹{summary?.totalRevenue ?? '--'}</div>
+                    </div>
+                  </div>
+                  <OrdersPerProductChart data={ordersPerProduct} />
+                  <div style={{display: 'flex', justifyContent: 'space-between', marginTop: 18, fontSize: 15}}>
+                    <span><b>Top Product</b><br/>{products?.[0]?.name ?? 'N/A'}</span>
+                    <span><b>Stock Left</b><br/>{products?.[0]?.stock ?? 'N/A'}</span>
+                    <span><b>Recent Order</b><br/>{orders?.[0]?.product ?? 'N/A'}</span>
+                  </div>
+                </div>
+                <div style={{flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 20}}>
+                  <div className="card" style={{marginBottom: 0}}>
+                    <h4 style={{marginTop: 0, color: '#43a047'}}>Customer Satisfaction</h4>
+                    <div style={{fontSize: 32, fontWeight: 700, color: '#43a047', marginBottom: 8}}>93.13%</div>
+                    <div style={{display: 'flex', justifyContent: 'space-between', fontSize: 13}}>
+                      <span>Previous<br/>79.82</span>
+                      <span>% Change<br/>+14.29</span>
+                      <span>Trend<br/><span style={{color: '#43a047', fontWeight: 600}}>↑</span></span>
+                    </div>
+                  </div>
+                  <div className="card" style={{marginBottom: 0}}>
+                    <h4 style={{marginTop: 0}}>Browser Stats</h4>
+                    <div style={{fontSize: 15, lineHeight: 2}}>
+                      <span>Google Chrome <span style={{color: '#43a047', fontWeight: 600}}>65%</span></span><br/>
+                      <span>Mozilla Firefox <span style={{color: '#e53935', fontWeight: 600}}>12%</span></span><br/>
+                      <span>Internet Explorer <span style={{color: '#1976d2', fontWeight: 600}}>9%</span></span><br/>
+                      <span>Safari <span style={{color: '#fbc02d', fontWeight: 600}}>8%</span></span>
+                    </div>
+                  </div>
+                </div>
+                <div className="card" style={{flex: 1, minWidth: 0}}>
+                  <h4 style={{marginTop: 0}}>Order Status Breakdown</h4>
+                  <OrdersPerStatusChart data={ordersPerStatus} />
+                  <div style={{fontSize: 13, marginTop: 12}}>
+                    <span style={{color: '#1976d2'}}>Delivered: {ordersPerStatus?.Delivered ?? '--'}</span><br/>
+                    <span style={{color: '#e53935'}}>Cancelled: {ordersPerStatus?.Cancelled ?? '--'}</span><br/>
+                    <span style={{color: '#43a047'}}>Processing: {ordersPerStatus?.Processing ?? '--'}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -267,7 +302,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
         style={{
           marginLeft: sidebarCollapsed ? 60 : 220,
           transition: 'margin-left 0.2s',
-          background: '#232f3e',
+          background: 'linear-gradient(90deg, #232f3e 70%, #febd69 100%)',
           color: '#fff',
           boxShadow: '0 2px 8px rgba(35,47,62,0.09)',
           zIndex: 101,
@@ -280,20 +315,25 @@ const AdminDashboard = ({ admin, onLogout }) => {
           left: 0,
           top: 0,
           padding: '0 38px 0 38px',
+          borderBottom: '2px solid #f7dfa5',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <span style={{ color: '#febd69', fontWeight: 700, fontSize: 22, letterSpacing: 1.5 }}>Ms Mobile Admin</span>
+          <span style={{ fontSize: 14, color: '#fff', background: 'rgba(35,47,62,0.15)', borderRadius: 6, padding: '3px 12px', marginLeft: 12, fontWeight: 500 }}>
+            {section.charAt(0).toUpperCase() + section.slice(1)}
+          </span>
         </div>
         <button
           style={{
-            background: '#febd69',
+            background: 'linear-gradient(90deg, #febd69 80%, #fffbe6 100%)',
             border: 'none',
             color: '#232f3e',
             padding: '8px 18px',
-            borderRadius: 4,
+            borderRadius: 7,
             fontWeight: 600,
             cursor: 'pointer',
+            boxShadow: '0 1px 6px rgba(35,47,62,0.07)',
             transition: 'background 0.2s',
           }}
           onClick={onLogout}
@@ -301,7 +341,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
           Logout
         </button>
       </header>
-      <main className="admin-dashboard-main" style={{paddingTop: 68}}>
+      <main className="admin-dashboard-main" style={{ paddingTop: 80, background: 'repeating-linear-gradient(135deg, #f8f9fb, #f8f9fb 32px, #f7dfa5 32px, #f7dfa5 36px)' }}>
         {renderSection()}
       </main>
     </div>
