@@ -1,6 +1,6 @@
 .admin-sidebar {
   width: 220px;
-  background: linear-gradient(180deg, #232f3e 80%, #f7dfa5 100%);
+  background: linear-gradient(180deg, #212a36 80%, #ffe6a0 100%);
   color: #fff;
   min-height: 100vh;
   box-shadow: 2px 0 16px rgba(35,47,62,0.09);
@@ -17,8 +17,8 @@
   padding: 32px 0 24px 0;
   text-align: center;
   letter-spacing: 1px;
-  color: #f7dfa5;
-  background: #232f3e;
+  color: #ffe6a0;
+  background: #212a36;
 }
 .admin-sidebar nav ul {
   list-style: none;
@@ -36,9 +36,9 @@
 }
 .admin-sidebar nav li.active,
 .admin-sidebar nav li:hover {
-  background: #f7dfa5;
-  color: #232f3e;
-  border-left: 4px solid #232f3e;
+  background: #ffe6a0;
+  color: #212a36;
+  border-left: 4px solid #212a36;
 }
 .sidebar-icon {
   margin-right: 16px;

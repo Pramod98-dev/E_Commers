@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { OrdersPerProductChart, OrdersPerStatusChart } from "./Charts";
-import AdminSidebar from "./AdminSidebar";
-import "./AdminSidebar.css";
 import "./AdminDashboard.css";
 import DashboardStats from "./DashboardStats";
 import "./DashboardStats.css";
@@ -281,13 +279,14 @@ const AdminDashboard = ({ admin, onLogout }) => {
 
   return (
     <div className="admin-dashboard-layout">
-      <AdminSidebar active={section} onSelect={setSection} />
       <div style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
         <Header
           admin={admin}
           isAdmin={true}
           onLogout={onLogout}
-          sidebarCollapsed={sidebarCollapsed}
+          sidebarCollapsed={false}
+          section={section}
+          setSection={setSection}
         />
         <main className="admin-dashboard-main">
           {error && <div className="form-error">{error}</div>}

@@ -78,17 +78,20 @@ function App() {
 
   return (
     <div className="App">
-      <Header
-        onLoginClick={handleLoginClick}
-        user={user}
-        admin={admin}
-        onLogout={handleLogout}
-      />
+      {/* Only show Header globally if not in dashboard views */}
+      {!admin && !user && (
+        <Header
+          onLoginClick={handleLoginClick}
+          user={user}
+          admin={admin}
+          onLogout={handleLogout}
+        />
+      )}
       <main className="main-content enhanced-main">
         {user ? (
           <UserDashboard user={user} />
         ) : admin ? (
-          <AdminDashboard admin={admin} />
+          <AdminDashboard admin={admin} onLogout={handleLogout} />
         ) : (
           <CategoryCardSection onCategoryClick={handleCategoryClick} />
         )}

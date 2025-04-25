@@ -1,12 +1,15 @@
 .admin-dashboard-layout {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: #f8f9fb;
+  margin: 0;
+  padding: 0;
 }
 .admin-dashboard-main {
   flex: 1;
-  margin-left: 220px;
-  padding: 108px 40px 32px 40px;
+  margin-left: 0;
+  padding: 62px 40px 32px 40px;
   background: #fff;
   min-height: 100vh;
   box-sizing: border-box;
@@ -219,21 +222,21 @@
   left: 0;
   bottom: 0;
   z-index: 110;
-  margin-left: 220px;
+  margin-left: 0;
 }
 @media (max-width: 900px) {
   .admin-dashboard-main {
-    margin-left: 60px;
-    padding: 88px 6px 20px 6px;
+    margin-left: 0;
+    padding: 52px 6px 20px 6px;
   }
   .admin-footer {
-    margin-left: 60px;
+    margin-left: 0;
   }
 }
 @media (max-width: 600px) {
   .admin-dashboard-main {
     margin-left: 0;
-    padding: 78px 2px 8px 2px;
+    padding: 42px 2px 8px 2px;
   }
   .admin-footer {
     margin-left: 0;

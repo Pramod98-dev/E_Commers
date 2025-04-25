@@ -1,17 +1,25 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  background: linear-gradient(90deg, #232f3e 80%, #f7dfa5 100%);
-  padding: 0 30px;
-  height: 54px;
-  min-height: 54px;
-  max-height: 54px;
+  background: linear-gradient(90deg, #212a36 80%, #ffe6a0 100%);
+  padding: 0;
+  height: 42px;
+  min-height: 42px;
+  max-height: 42px;
   box-shadow: 0 2px 8px rgba(35,47,62,0.09);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  z-index: 110;
+  margin: 0;
 }
 .header__left {
   display: flex;
   align-items: center;
+  margin-left: 8px;
 }
 .header__logo {
   height: 40px;
@@ -25,7 +33,26 @@
 }
 .header__nav {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  gap: 6px;
+  margin-left: 24px;
+}
+.header-nav-btn {
+  background: none;
+  border: none;
+  color: #ffe6a0;
+  font-size: 1.08rem;
+  padding: 0 18px;
+  height: 42px;
+  cursor: pointer;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  transition: color 0.17s, border 0.17s;
+}
+.header-nav-btn.active, .header-nav-btn:hover {
+  color: #212a36;
+  background: #ffe6a0;
+  border-bottom: 3px solid #212a36;
 }
 .header__login {
   background: #febd69;
@@ -45,6 +72,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  margin-left: 28px;
 }
 .profile-icon-btn {
   background: none;
