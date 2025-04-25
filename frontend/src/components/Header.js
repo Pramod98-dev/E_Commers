@@ -6,9 +6,9 @@ const Header = ({ onLoginClick, user, admin, onLogout, isAdmin, section, setSect
   // Remove background and color from inline style so CSS takes over, but keep marginLeft for sidebar
   const headerStyle = isAdmin
     ? {
-        marginLeft: sidebarCollapsed ? 60 : 220,
-        transition: 'margin-left 0.2s',
-        width: '100%',
+        marginLeft: 0,
+        transition: 'none',
+        width: '100vw',
       }
     : {};
   const navItems = [
