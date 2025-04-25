@@ -5,35 +5,35 @@ const categories = [
   {
     name: "Mobiles & Smartphones",
     image:
-      "https://images.samsung.com/is/image/samsung/assets/in/smartphones/galaxy-s24-ultra/buy/kv_galaxy-s24-ultra-mo.jpg",
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80",
     description:
       "Explore the latest mobiles and smartphones from top brands at unbeatable prices.",
   },
   {
     name: "Audio & Headphones",
     image:
-      "https://www.boat-lifestyle.com/cdn/shop/files/141-main-256x256.png",
+      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80",
     description:
       "Experience immersive sound with our range of headphones, earbuds, and speakers.",
   },
   {
     name: "Television & Smart TVs",
     image:
-      "https://images.samsung.com/is/image/samsung/p6pim/in/ua55au7700klxl/gallery/in-uhd-au7700-ua55au7700klxl-thumb-533130874",
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
     description:
       "Upgrade your home with the latest 4K and smart TVs for an outstanding viewing experience.",
   },
   {
     name: "Kitchen Appliances",
     image:
-      "https://www.lg.com/in/images/microwave-ovens/md07501484/gallery/MC3286BRUM-D-01.jpg",
+      "https://images.unsplash.com/photo-1506368083636-6defb67639f0?auto=format&fit=crop&w=400&q=80",
     description:
       "Modern kitchen solutions including microwaves, mixers, and more for your convenience.",
   },
   {
     name: "Home Appliances",
     image:
-      "https://www.lg.com/in/images/refrigerators/md07501484/gallery/GL-T292RPZN-Refrigerators-Front-View-D-01.jpg",
+      "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80",
     description:
       "Discover a wide range of refrigerators, washing machines, and other home essentials.",
   },
