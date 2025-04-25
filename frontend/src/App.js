@@ -145,11 +145,6 @@ function App() {
             onSignUp={handleSignUp}
           />
         )}
-        {(user || admin) && (
-          <button className="hero-btn btn-cancel" style={{marginTop: 24}} onClick={handleLogout}>
-            Logout
-          </button>
-        )}
       </main>
       <Footer />
     </div>

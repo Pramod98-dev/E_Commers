@@ -26,6 +26,7 @@ const AdminSidebar = ({ active, onSelect }) => (
         ))}
       </ul>
     </nav>
+    {/* Remove any logout button from sidebar */}
   </aside>
 );
 

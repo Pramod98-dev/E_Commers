@@ -21,14 +21,7 @@ const Header = ({ onLoginClick, user, admin, onLogout, isAdmin, sidebarCollapsed
         <span className="header__brand">Ms Mobile Admin</span>
       </div>
       <nav className="header__nav">
-        {user || admin ? (
-          <button className="header__login" onClick={onLogout}>Logout</button>
-        ) : (
-          <>
-            <button className="header__login" onClick={() => onLoginClick('user')}>User Login</button>
-            <button className="header__login" onClick={() => onLoginClick('admin')}>Admin Login</button>
-          </>
-        )}
+        {/* Removed Logout button globally as requested */}
       </nav>
     </header>
   );

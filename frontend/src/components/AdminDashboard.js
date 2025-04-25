@@ -312,7 +312,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
       <main className="admin-dashboard-main" style={{ paddingTop: 80, background: '#fff' }}>
         {renderSection()}
       </main>
-      {/* Removed custom admin-footer with logout button as requested. Footer should now be handled only by the original/global app footer. */}
+      {/* Ensure no logout button or custom footer is rendered here. */}
     </div>
   );
 };
