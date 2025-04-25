@@ -37,6 +37,34 @@ const categories = [
     description:
       "Discover a wide range of refrigerators, washing machines, and other home essentials.",
   },
+  {
+    name: "Laptops & Computers",
+    image:
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80",
+    description:
+      "Shop the latest laptops, desktops, and computer accessories for work and play.",
+  },
+  {
+    name: "Wearables & Smartwatches",
+    image:
+      "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=400&q=80",
+    description:
+      "Track your fitness and stay connected with stylish wearables and smartwatches.",
+  },
+  {
+    name: "Gaming Consoles",
+    image:
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80",
+    description:
+      "Discover the latest gaming consoles and accessories for immersive entertainment.",
+  },
+  {
+    name: "Cameras & Photography",
+    image:
+      "https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=400&q=80",
+    description:
+      "Capture memories with top-rated cameras, lenses, and photography gear.",
+  },
 ];
 
 const CategoryCardSection = ({ onCategoryClick }) => (
