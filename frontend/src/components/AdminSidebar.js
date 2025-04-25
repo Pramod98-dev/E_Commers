@@ -5,8 +5,8 @@ const sidebarItems = [
   { key: "dashboard", label: "Dashboard", icon: "🏠" },
   { key: "products", label: "Products", icon: "📦" },
   { key: "orders", label: "Orders", icon: "🛒" },
-  { key: "analytics", label: "Analytics", icon: "📊" },
   // Add more sections here as needed
+  // Removed analytics section as requested
 ];
 
 const AdminSidebar = ({ active, onSelect }) => (
