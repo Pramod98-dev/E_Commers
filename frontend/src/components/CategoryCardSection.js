@@ -67,27 +67,63 @@ const categories = [
   },
 ];
 
+const relatedInfo = [
+  {
+    title: "Why Shop Electronics With Us?",
+    description:
+      "We offer genuine products, fast shipping, and unbeatable customer support. Our curated selection ensures you get the latest and most reliable electronic appliances at the best prices.",
+  },
+  {
+    title: "Secure Shopping",
+    description:
+      "Your data and transactions are protected with industry-leading security. Shop with confidence on our trusted platform.",
+  },
+  {
+    title: "Top Brands",
+    description:
+      "We partner with top brands to bring you the best deals and exclusive launches in the electronics market.",
+  },
+  {
+    title: "Customer Reviews",
+    description:
+      "Read real reviews from verified buyers to make informed decisions for your next purchase.",
+  },
+];
+
 const CategoryCardSection = ({ onCategoryClick }) => (
-  <div className="category-card-section">
-    {categories.map((cat, idx) => (
-      <div
-        className="category-card enhanced-category-card"
-        key={cat.name}
-        onClick={() => onCategoryClick(cat)}
-        tabIndex={0}
-        role="button"
-        aria-label={`Explore ${cat.name}`}
-      >
-        <div className="category-card-img-wrap">
-          <img src={cat.image} alt={cat.name} className="category-card-img" loading="lazy" onError={(e) => (e.target.style.opacity = 0.3)} />
+  <>
+    <div className="category-card-section">
+      {categories.map((cat, idx) => (
+        <div
+          className="category-card enhanced-category-card"
+          key={cat.name}
+          onClick={() => onCategoryClick(cat)}
+          tabIndex={0}
+          role="button"
+          aria-label={`Explore ${cat.name}`}
+        >
+          <div className="category-card-img-wrap">
+            <img src={cat.image} alt={cat.name} className="category-card-img" loading="lazy" onError={(e) => (e.target.style.opacity = 0.3)} />
+          </div>
+          <div className="category-card-content">
+            <h3 className="category-card-title">{cat.name}</h3>
+            <p className="category-card-desc">{cat.description}</p>
+          </div>
         </div>
-        <div className="category-card-content">
-          <h3 className="category-card-title">{cat.name}</h3>
-          <p className="category-card-desc">{cat.description}</p>
-        </div>
+      ))}
+    </div>
+    <section className="related-info-section">
+      <h2 className="related-info-heading">More About Shopping Electronics</h2>
+      <div className="related-info-cards">
+        {relatedInfo.map((info, idx) => (
+          <div className="related-info-card" key={idx}>
+            <h3>{info.title}</h3>
+            <p>{info.description}</p>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
+    </section>
+  </>
 );
 
 export default CategoryCardSection;
