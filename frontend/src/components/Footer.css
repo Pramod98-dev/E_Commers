@@ -1,0 +1,32 @@
+.footer {
+  background: #232f3e;
+  color: #fff;
+  padding: 40px 0 16px 0;
+  margin-top: 40px;
+}
+.footer__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.footer__about, .footer__contact {
+  flex: 1 1 320px;
+  margin: 0 16px;
+}
+.footer__about h3, .footer__contact h3 {
+  color: #febd69;
+  margin-bottom: 10px;
+}
+.footer__about p, .footer__contact p {
+  color: #ddd;
+  font-size: 1rem;
+}
+.footer__copyright {
+  text-align: center;
+  color: #aaa;
+  margin-top: 28px;
+  font-size: 0.95rem;
+}

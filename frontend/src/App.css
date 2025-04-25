@@ -1,0 +1,156 @@
+.App {
+  text-align: center;
+  background: #f7f7fa;
+  min-height: 100vh;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.main-content {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.enhanced-main {
+  background: linear-gradient(135deg, #fff 60%, #e5e9f2 100%);
+  box-shadow: 0 4px 16px rgba(35,47,62,0.06);
+}
+
+.section {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.section h2 {
+  color: #232f3e;
+  margin-bottom: 10px;
+}
+
+.section p {
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.hero-section {
+  padding: 48px 0 36px 0;
+  background: none;
+}
+
+.hero-section h1 {
+  font-size: 2.6rem;
+  color: #232f3e;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.hero-sub {
+  color: #444;
+  font-size: 1.3rem;
+  margin-bottom: 24px;
+}
+
+.hero-btn {
+  background: #febd69;
+  color: #232f3e;
+  border: none;
+  border-radius: 4px;
+  padding: 14px 38px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(35,47,62,0.07);
+  transition: background 0.2s, color 0.2s;
+}
+
+.hero-btn:hover {
+  background: #f3a847;
+  color: #fff;
+}
+
+.header__navlink {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.header__navlink:hover {
+  color: #febd69;
+}
+
+/* Modal Styles */
+.login-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(35,47,62,0.32);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-modal {
+  background: #fff;
+  padding: 34px 28px 22px 28px;
+  border-radius: 10px;
+  box-shadow: 0 6px 32px rgba(35,47,62,0.18);
+  text-align: center;
+  min-width: 320px;
+  max-width: 90vw;
+}
+.login-modal h3 {
+  margin-bottom: 12px;
+  color: #232f3e;
+}
+.login-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+.btn-cancel {
+  background: #eee;
+  color: #232f3e;
+  border: 1px solid #ccc;
+}
+.btn-cancel:hover {
+  background: #ddd;
+  color: #232f3e;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
