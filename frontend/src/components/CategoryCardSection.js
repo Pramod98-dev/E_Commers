@@ -1,129 +1,95 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./CategoryCardSection.css";
 
-const categories = [
+const sliderImages = [
   {
-    name: "Mobiles & Smartphones",
-    image:
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Explore the latest mobiles and smartphones from top brands at unbeatable prices.",
+    url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+    alt: "Modern Electronics Store Interior with Gadgets",
   },
   {
-    name: "Audio & Headphones",
-    image:
-      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Experience immersive sound with our range of headphones, earbuds, and speakers.",
+    url: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1200&q=80",
+    alt: "HD Display of Laptops and Mobiles in Store",
   },
   {
-    name: "Television & Smart TVs",
-    image:
-      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Upgrade your home with the latest 4K and smart TVs for an outstanding viewing experience.",
+    url: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80",
+    alt: "Showcase of Smart TVs and Audio Devices",
   },
   {
-    name: "Kitchen Appliances",
-    image:
-      "https://images.unsplash.com/photo-1506368083636-6defb67639f0?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Modern kitchen solutions including microwaves, mixers, and more for your convenience.",
-  },
-  {
-    name: "Home Appliances",
-    image:
-      "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Discover a wide range of refrigerators, washing machines, and other home essentials.",
-  },
-  {
-    name: "Laptops & Computers",
-    image:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Shop the latest laptops, desktops, and computer accessories for work and play.",
-  },
-  {
-    name: "Wearables & Smartwatches",
-    image:
-      "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Track your fitness and stay connected with stylish wearables and smartwatches.",
-  },
-  {
-    name: "Gaming Consoles",
-    image:
-      "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Discover the latest gaming consoles and accessories for immersive entertainment.",
-  },
-  {
-    name: "Cameras & Photography",
-    image:
-      "https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Capture memories with top-rated cameras, lenses, and photography gear.",
+    url: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80",
+    alt: "Bright Electronics Store with Cameras and Gadgets",
   },
 ];
 
-const relatedInfo = [
+const SLIDE_INTERVAL = 3500;
+
+const storeInfo = [
   {
-    title: "Why Shop Electronics With Us?",
-    description:
-      "We offer genuine products, fast shipping, and unbeatable customer support. Our curated selection ensures you get the latest and most reliable electronic appliances at the best prices.",
+    title: "About Our Store",
+    description: "Ms Mobile is your one-stop shop for the latest mobiles, laptops, smart TVs, cameras, and all things electronics. We are committed to providing genuine products, competitive prices, and excellent customer service.",
   },
   {
-    title: "Secure Shopping",
-    description:
-      "Your data and transactions are protected with industry-leading security. Shop with confidence on our trusted platform.",
+    title: "Why Shop With Us?",
+    description: "Enjoy fast shipping, secure payments, and exclusive deals from top brands. Our expert team is always ready to help you make the best choice for your needs.",
   },
   {
-    title: "Top Brands",
-    description:
-      "We partner with top brands to bring you the best deals and exclusive launches in the electronics market.",
+    title: "Customer Satisfaction",
+    description: "We value every customer and strive for 100% satisfaction. Read real reviews, get expert advice, and experience hassle-free returns.",
   },
   {
-    title: "Customer Reviews",
-    description:
-      "Read real reviews from verified buyers to make informed decisions for your next purchase.",
+    title: "Visit Us In-Store or Online",
+    description: "Shop from the comfort of your home or visit our modern retail locations to experience the latest tech hands-on!",
   },
 ];
 
-const CategoryCardSection = ({ onCategoryClick }) => (
-  <>
-    <div className="category-card-section">
-      {categories.map((cat, idx) => (
-        <div
-          className="category-card enhanced-category-card"
-          key={cat.name}
-          onClick={() => onCategoryClick(cat)}
-          tabIndex={0}
-          role="button"
-          aria-label={`Explore ${cat.name}`}
-        >
-          <div className="category-card-img-wrap">
-            <img src={cat.image} alt={cat.name} className="category-card-img" loading="lazy" onError={(e) => (e.target.style.opacity = 0.3)} />
-          </div>
-          <div className="category-card-content">
-            <h3 className="category-card-title">{cat.name}</h3>
-            <p className="category-card-desc">{cat.description}</p>
+const CategoryCardSection = () => {
+  const [current, setCurrent] = useState(0);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setCurrent((prev) => (prev + 1) % sliderImages.length);
+    }, SLIDE_INTERVAL);
+    return () => clearTimeout(timeoutRef.current);
+  }, [current]);
+
+  return (
+    <div>
+      <div className="main-slider-outer">
+        <div className="main-slider-container">
+          {sliderImages.map((img, idx) => (
+            <img
+              key={img.url}
+              src={img.url}
+              alt={img.alt}
+              className={`main-slider-img${idx === current ? " active" : ""}`}
+              style={{ display: idx === current ? "block" : "none" }}
+            />
+          ))}
+          <div className="main-slider-dots">
+            {sliderImages.map((_, idx) => (
+              <span
+                key={idx}
+                className={idx === current ? "dot active" : "dot"}
+                onClick={() => setCurrent(idx)}
+              ></span>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-    <section className="related-info-section">
-      <h2 className="related-info-heading">More About Shopping Electronics</h2>
-      <div className="related-info-cards">
-        {relatedInfo.map((info, idx) => (
-          <div className="related-info-card" key={idx}>
-            <h3>{info.title}</h3>
-            <p>{info.description}</p>
-          </div>
-        ))}
       </div>
-    </section>
-  </>
-);
+      <section className="store-info-section">
+        <h2 className="store-info-heading">Welcome to Ms Mobile Electronics</h2>
+        <div className="store-info-cards">
+          {storeInfo.map((info, idx) => (
+            <div className="store-info-card" key={idx}>
+              <h3>{info.title}</h3>
+              <p>{info.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default CategoryCardSection;

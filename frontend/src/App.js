@@ -3,15 +3,18 @@ import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CategoryCardSection from "./components/CategoryCardSection";
+import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SignUpForm";
 
 function App() {
   const [loginType, setLoginType] = useState(null);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(null); // "login" | "signup" | null
 
   const handleLoginClick = (type) => {
     setLoginType(type);
-    alert(`${type.charAt(0).toUpperCase() + type.slice(1)} Login Clicked!`);
+    setShowAuthModal("login");
   };
 
   const handleCategoryClick = (category) => {
@@ -23,6 +26,9 @@ function App() {
     setShowLoginPrompt(false);
     setSelectedCategory(null);
   };
+
+  const handleAuthClose = () => setShowAuthModal(null);
+  const handleAuthSwitch = (target) => setShowAuthModal(target);
 
   return (
     <div className="App">
@@ -40,8 +46,8 @@ function App() {
                 <button
                   className="hero-btn"
                   onClick={() => {
-                    handleLoginClick("user");
-                    handleClosePrompt();
+                    setShowAuthModal("login");
+                    setShowLoginPrompt(false);
                   }}
                 >
                   Login
@@ -49,8 +55,8 @@ function App() {
                 <button
                   className="hero-btn"
                   onClick={() => {
-                    alert("Sign Up Clicked!");
-                    handleClosePrompt();
+                    setShowAuthModal("signup");
+                    setShowLoginPrompt(false);
                   }}
                 >
                   Sign Up
@@ -64,6 +70,12 @@ function App() {
               </div>
             </div>
           </div>
+        )}
+        {showAuthModal === "login" && (
+          <LoginForm onClose={handleAuthClose} onSwitch={handleAuthSwitch} />
+        )}
+        {showAuthModal === "signup" && (
+          <SignUpForm onClose={handleAuthClose} onSwitch={handleAuthSwitch} />
         )}
       </main>
       <Footer />
