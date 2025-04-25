@@ -5,12 +5,16 @@ import Footer from "./components/Footer";
 import CategoryCardSection from "./components/CategoryCardSection";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
+import UserDashboard from "./components/UserDashboard";
+import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
-  const [loginType, setLoginType] = useState(null);
+  const [loginType, setLoginType] = useState(null); // "user" | "admin"
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(null); // "login" | "signup" | null
+  const [user, setUser] = useState(null); // {name, email, role}
+  const [admin, setAdmin] = useState(null); // {name, email, role}
 
   const handleLoginClick = (type) => {
     setLoginType(type);
@@ -30,11 +34,39 @@ function App() {
   const handleAuthClose = () => setShowAuthModal(null);
   const handleAuthSwitch = (target) => setShowAuthModal(target);
 
+  // Simulate login for user/admin
+  const handleLogin = (credentials) => {
+    if (loginType === "admin") {
+      setAdmin({ name: "Admin", email: credentials.email, role: "admin" });
+    } else {
+      setUser({ name: "User", email: credentials.email, role: "user" });
+    }
+    setShowAuthModal(null);
+  };
+
+  // Simulate sign up for user (admin sign up not exposed)
+  const handleSignUp = (details) => {
+    setUser({ name: details.name, email: details.email, role: "user" });
+    setShowAuthModal(null);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setAdmin(null);
+    setLoginType(null);
+  };
+
   return (
     <div className="App">
       <Header onLoginClick={handleLoginClick} />
       <main className="main-content enhanced-main">
-        <CategoryCardSection onCategoryClick={handleCategoryClick} />
+        {user ? (
+          <UserDashboard user={user} />
+        ) : admin ? (
+          <AdminDashboard admin={admin} />
+        ) : (
+          <CategoryCardSection onCategoryClick={handleCategoryClick} />
+        )}
         {showLoginPrompt && (
           <div className="login-modal-backdrop" onClick={handleClosePrompt}>
             <div className="login-modal" onClick={(e) => e.stopPropagation()}>
@@ -46,6 +78,7 @@ function App() {
                 <button
                   className="hero-btn"
                   onClick={() => {
+                    setLoginType("user");
                     setShowAuthModal("login");
                     setShowLoginPrompt(false);
                   }}
@@ -55,6 +88,7 @@ function App() {
                 <button
                   className="hero-btn"
                   onClick={() => {
+                    setLoginType("user");
                     setShowAuthModal("signup");
                     setShowLoginPrompt(false);
                   }}
@@ -72,10 +106,24 @@ function App() {
           </div>
         )}
         {showAuthModal === "login" && (
-          <LoginForm onClose={handleAuthClose} onSwitch={handleAuthSwitch} />
+          <LoginForm
+            onClose={handleAuthClose}
+            onSwitch={handleAuthSwitch}
+            onLogin={handleLogin}
+            loginType={loginType}
+          />
         )}
         {showAuthModal === "signup" && (
-          <SignUpForm onClose={handleAuthClose} onSwitch={handleAuthSwitch} />
+          <SignUpForm
+            onClose={handleAuthClose}
+            onSwitch={handleAuthSwitch}
+            onSignUp={handleSignUp}
+          />
+        )}
+        {(user || admin) && (
+          <button className="hero-btn btn-cancel" style={{marginTop: 24}} onClick={handleLogout}>
+            Logout
+          </button>
         )}
       </main>
       <Footer />
